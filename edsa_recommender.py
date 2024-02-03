@@ -17,12 +17,12 @@
     ---------------------------------------------------------------------
 
     Description: This file is used to launch a minimal streamlit web
-	application. You are expected to extend certain aspects of this script
+    application. You are expected to extend certain aspects of this script
     and its dependencies as part of your predict project.
 
-	For further help with the Streamlit framework, see:
+    For further help with the Streamlit framework, see:
 
-	https://docs.streamlit.io/en/latest/
+    https://docs.streamlit.io/en/latest/
 
 """
 # Streamlit dependencies
@@ -45,7 +45,7 @@ def main():
 
     # DO NOT REMOVE the 'Recommender System' option below, however,
     # you are welcome to add more options to enrich your app.
-    page_options = ["Recommender System","Solution Overview"]
+    page_options = ["Recommender System", "Solution Overview", "Explore Dataset"]
 
     # -------------------------------------------------------------------
     # ----------- !! THIS CODE MUST NOT BE ALTERED !! -------------------
@@ -82,7 +82,6 @@ def main():
                     st.error("Oops! Looks like this algorithm does't work.\
                               We'll need to fix it!")
 
-
         if sys == 'Collaborative Based Filtering':
             if st.button("Recommend"):
                 try:
@@ -96,17 +95,39 @@ def main():
                     st.error("Oops! Looks like this algorithm does't work.\
                               We'll need to fix it!")
 
-
     # -------------------------------------------------------------------
 
     # ------------- SAFE FOR ALTERING/EXTENSION -------------------
     if page_selection == "Solution Overview":
         st.title("Solution Overview")
-        st.write("Describe your winning approach on this page")
+        st.write("EA Movie Recommender System")
+
+        st.image('resources/imgs/Image_header.png',use_column_width=True)
+        st.title("THE MOVIE RECOMMENDER SYSTEM")
+        st.write("The app is like a friend who knows your tastes really well. It recommends things by looking at what you and others liked before. It also pays attention to details like genres and actors to make sure the suggestions fit your preferences. So, it's like having a buddy who understands your taste in movies and shows, helping you discover content you'll likely enjoy. To achieve this, the app uses smart filters such as collaborative filtering, which considers your viewing history and preferences, and content-based filtering, focusing on specific features like genres and actors to tailor personalized recommendations just for you")
+        st.title("OBJECTIVE")
+        st.write("The primary objective of our Movie Recommender app is to enhance your entertainment experience by providing tailored movie recommendations. Leveraging smart filters like collaborative and content-based filtering, the app analyzes your viewing history and preferences. This ensures that each suggestion aligns with your tastes, making your movie selection process more enjoyable and efficient. Our aim is to simplify your decision-making and bring you closer to the movies you'll love")
+        st.title("View raw data")
+        st.title("RESOURCES")
+
+    if page_selection == "Explore Data":
+        st.title("Explore Data")
+        st.write("Here you can interact with the data used in the recommender system.")
+
+        # Load the movies dataset using pandas
+        movies_df = pd.read_csv('resources/data/movies.csv')
+
+        # Display a button to toggle data visibility
+        show_data = st.button("Toggle Data Visibility")
+
+        if show_data:
+            # Display a sample of the dataset when the button is pressed
+            st.write("Sample of the Movies Dataset:")
+            st.dataframe(movies_df.head(10))
 
     # You may want to add more sections here for aspects such as an EDA,
     # or to provide your business pitch.
 
-
 if __name__ == '__main__':
     main()
+
